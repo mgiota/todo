@@ -14,7 +14,16 @@
             <span class="checkmark"></span>
             {{ todo.label }}
           </label>
-          <button class="delete-button" @click="removeTodo(todo)">Delete</button>
+          <button class="delete-button" @click="removeTodo(todo)">
+            <svg class="trashcan" viewBox="0 0 400 400" width="400" height="400" background="#fff" fill="none" stroke="#000" stroke-width="25">
+              <path class="can" d="M80 360 L320 360 L340 100 L60 100 Z"/>
+              <path class="can" d="M130 320 L120 140"/>
+              <path class="can" d="M200 320 L200 140"/>
+              <path class="can" d="M270 320 L280 140"/>
+              <path class="can" d="M50 55 L350 55"/>
+              <path class="can" d="M170 40 L230 40"/>
+            </svg>
+          </button>
         </li>
       </ul>
     </div>
@@ -63,7 +72,7 @@ h1 {
 .page {
   display: grid;
   margin: 10%;
-  padding: 2%;
+  padding: 5% 2% 5% 2%;
   grid-template-rows: 15vh 10vh auto;
   border: 5px solid #9ACD32;
   border-radius: 30px;
@@ -90,8 +99,7 @@ h1 {
 
 .list-container {
   min-height: 55vh;
-  padding: 5% 0 5% 5%;
-
+  margin-top: 5%;
 }
 
 label, button {
@@ -133,7 +141,7 @@ li {
   width: 25px;
   background-color: #fff;
   border: 3px solid #9ACD32;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 
 .checkbox-container input:checked ~ .checkmark {
@@ -157,6 +165,17 @@ li {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+button {
+  display: inline-block;
+  background: none;
+  border: none;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
 }
 
 </style>

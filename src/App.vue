@@ -9,7 +9,8 @@
     <div class="list-container">
       <ul class="todos">
         <li class="list-items" v-for="todo in todos" :key="todo.id">
-          {{ todo.label }}
+          
+        {{ todo.label }}
           <button class="delete-button" @click="removeTodo(todo)">Delete</button>
         </li>
       </ul>
@@ -32,7 +33,6 @@ export default {
       this.todos.push({id: this.todos.length, label: this.currentTodo, completed: false});
       this.currentTodo = '';
     },
-
     removeTodo(todo) {
       var index = this.todos.indexOf(todo);
       this.todos.splice(index, 1);
@@ -43,15 +43,10 @@ export default {
 
 
 <style>
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
-
 body {
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Dancing Script', sans-serif;
   background-image: url("strawberry.png");
   background-repeat: repeat;
-  max-width: 600px;
-  margin: 5vh auto 5vh auto;
 }
 
 h1 {
@@ -59,9 +54,16 @@ h1 {
   text-decoration: underline;
 }
 
-.page {
-  margin: 0 10% 0 10%;
+.page-container {
   display: grid;
+  max-width: 900px;
+  margin: auto;
+}
+
+.page {
+  display: grid;
+  margin: 10%;
+  padding: 2%;
   grid-template-rows: 15vh 10vh auto;
   border: 5px solid #9ACD32;
   border-radius: 30px;
@@ -92,9 +94,21 @@ h1 {
 
 }
 
-.list-items {
+.list-item {
   font-size: 3vh;
   padding-bottom: 3%;
+}
+
+label, button {
+  cursor: pointer;
+}
+
+
+
+.md-checkbox {
+  border: 2px solid #000;
+  border-radius: 50%;
+  background-color: green;
 }
 
 </style>

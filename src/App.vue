@@ -9,8 +9,11 @@
     <div class="list-container">
       <ul class="todos">
         <li class="list-items" v-for="todo in todos" :key="todo.id">
-          
-        {{ todo.label }}
+          <label class="checkbox-container">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            {{ todo.label }}
+          </label>
           <button class="delete-button" @click="removeTodo(todo)">Delete</button>
         </li>
       </ul>
@@ -25,7 +28,8 @@ export default {
   data() {
     return {
       todos: [],
-      currentTodo: ''
+      currentTodo: '',
+      completed: ''
     };
   },
   methods: {
@@ -47,17 +51,13 @@ body {
   font-family: 'Dancing Script', sans-serif;
   background-image: url("strawberry.png");
   background-repeat: repeat;
+  max-width: 900px;
+  margin: auto;
 }
 
 h1 {
   font-size: 5vh;
   text-decoration: underline;
-}
-
-.page-container {
-  display: grid;
-  max-width: 900px;
-  margin: auto;
 }
 
 .page {
@@ -94,21 +94,69 @@ h1 {
 
 }
 
-.list-item {
-  font-size: 3vh;
-  padding-bottom: 3%;
-}
-
 label, button {
   cursor: pointer;
+
 }
 
+label {
+  padding-right: 20px;
+}
 
+li {
+    list-style-type: none;
+}
 
-.md-checkbox {
-  border: 2px solid #000;
-  border-radius: 50%;
-  background-color: green;
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  display: none;
+}
+
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 3vh;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: 3px solid #9ACD32;
+  border-radius: 8px;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #9ACD32;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: inline-block;
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 </style>

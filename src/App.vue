@@ -14,14 +14,24 @@
             <span class="checkmark"></span>
             {{ todo.label }}
           </label>
+          <div v-if="todo.editTodo">
+            <input class="edit" type="text-input" v-model="todo.editTodo" @keyup.enter="updateTodo(todo)">
+          </div>
+          <button class="edit-button" @click="editTodo(todo)">
+            <svg class="pen" width="20" height="20" fill="none" stroke="#000" stroke-width="1.05">
+              <path d="M4 12 L15 1 L19 5 L8 16 L4 12"/>
+              <path d="M16 4 L7 13"/>
+              <path d="M3 13 L7 17 L1 19 L3 13 "/>
+            </svg>
+          </button>
           <button class="delete-button" @click="removeTodo(todo)">
-            <svg class="trashcan" viewBox="0 0 400 400" width="400" height="400" background="#fff" fill="none" stroke="#000" stroke-width="25">
-              <path class="can" d="M80 360 L320 360 L340 100 L60 100 Z"/>
-              <path class="can" d="M130 320 L120 140"/>
-              <path class="can" d="M200 320 L200 140"/>
-              <path class="can" d="M270 320 L280 140"/>
-              <path class="can" d="M50 55 L350 55"/>
-              <path class="can" d="M170 40 L230 40"/>
+            <svg class="trashcan" width="20" height="20" fill="none" stroke="#000" stroke-width="1.05">
+              <path class="can" d="M4 18 L16 18 L16 5 L4 5 Z"/>
+              <path class="can" d="M7 16 L7 7"/>
+              <path class="can" d="M10 16 L10 7"/>
+              <path class="can" d="M13 16 L13 7"/>
+              <path class="can" d="M3 2.5 L17 2.5"/>
+              <path class="can" d="M8.5 1.5 L11.5 1.5"/>
             </svg>
           </button>
         </li>
@@ -38,7 +48,7 @@ export default {
     return {
       todos: [],
       currentTodo: '',
-      completed: ''
+      editTodo: ''
     };
   },
   methods: {
@@ -49,7 +59,15 @@ export default {
     removeTodo(todo) {
       var index = this.todos.indexOf(todo);
       this.todos.splice(index, 1);
-    }
+    },
+    editTodo(todo) {
+      todo.editTodo = true;
+    },
+    updateTodo(todo) {
+      todo.label = todo.editTodo;
+      todo.editTodo = false;
+    },
+
   }
 };
 </script>
@@ -57,7 +75,7 @@ export default {
 
 <style>
 body {
-  font-family: 'Dancing Script', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   background-image: url("strawberry.png");
   background-repeat: repeat;
   max-width: 900px;
@@ -104,11 +122,12 @@ h1 {
 
 label, button {
   cursor: pointer;
+  margin-bottom: 5%;
 
 }
 
 label {
-  padding-right: 20px;
+  padding-right: 5px;
 }
 
 li {

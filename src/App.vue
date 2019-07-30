@@ -14,10 +14,8 @@
             <span class="checkmark"></span>
             {{ todo.label }}
           </label>
-          <div v-if="todo.editTodo">
-            <input class="edit" type="text-input" v-model="todo.editTodo" @keyup.enter="updateTodo(todo)">
-          </div>
-          <button class="edit-button" @click="editTodo(todo)">
+
+          <button class="edit-button" v-model="todo.editingTodo" @click="editTodo(todo)">
             <svg class="pen" width="20" height="20" fill="none" stroke="#000" stroke-width="1.05">
               <path d="M4 12 L15 1 L19 5 L8 16 L4 12"/>
               <path d="M16 4 L7 13"/>
@@ -34,6 +32,9 @@
               <path class="can" d="M8.5 1.5 L11.5 1.5"/>
             </svg>
           </button>
+          <div v-if="todo.editingTodo">
+            <input class="edit-input" type="text" v-model="todo.editedTodo" @keyup.esc="hideEditTodo(todo)" @keydown.enter="updateTodo(todo)" placeholder=" Edit here">
+          </div>
         </li>
       </ul>
     </div>
@@ -48,12 +49,13 @@ export default {
     return {
       todos: [],
       currentTodo: '',
-      editTodo: ''
+      editingTodo: '',
+      editedTodo: ''
     };
   },
   methods: {
     addTodo() {
-      this.todos.push({id: this.todos.length, label: this.currentTodo, completed: false});
+      this.todos.push({id: this.todos.length, label: this.currentTodo, editingTodo: false});
       this.currentTodo = '';
     },
     removeTodo(todo) {
@@ -61,13 +63,15 @@ export default {
       this.todos.splice(index, 1);
     },
     editTodo(todo) {
-      todo.editTodo = true;
+      todo.editingTodo = true;
     },
     updateTodo(todo) {
-      todo.label = todo.editTodo;
-      todo.editTodo = false;
+      todo.label = todo.editedTodo;
+      todo.editingTodo = false;
     },
-
+    hideEditTodo(todo) {
+      todo.editingTodo = false;
+    }
   }
 };
 </script>
@@ -105,7 +109,7 @@ h1 {
   margin: auto;
 }
 
-.text-input {
+.text-input, .edit-input {
   width: 50vw;
   max-width: 350px;
   font-family: inherit;
@@ -113,6 +117,11 @@ h1 {
   background-color: #e1f0c1;
   border: none;
   padding: 1% 0 1% 0;
+}
+
+.edit-input {
+  margin-bottom: 5%;
+  width: 35vw;
 }
 
 .list-container {

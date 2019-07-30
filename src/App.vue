@@ -15,7 +15,7 @@
             {{ todo.label }}
           </label>
 
-          <button class="edit-button" v-model="todo.editingTodo" @click="editTodo(todo)">
+          <button class="edit-button" @click="editTodo(todo)">
             <svg class="pen" width="20" height="20" fill="none" stroke="#000" stroke-width="1.05">
               <path d="M4 12 L15 1 L19 5 L8 16 L4 12"/>
               <path d="M16 4 L7 13"/>

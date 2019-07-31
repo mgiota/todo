@@ -1,7 +1,7 @@
 {
   "name": "todo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "deploy": "gh-pages -d dist",
     "serve": "vue-cli-service serve",

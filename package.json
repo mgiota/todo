@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cesare83.github.io/todo/",
+  "homepage": "https://mgiota.github.io/todo",
   "scripts": {
     "deploy": "gh-pages -d dist",
     "serve": "vue-cli-service serve",
